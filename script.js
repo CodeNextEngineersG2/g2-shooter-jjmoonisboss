@@ -1,3 +1,5 @@
+var canvasWidth= 500;
+var canvasHeight=400;
 // UI Variables
 var canvas;
 var gameScreen;
@@ -39,7 +41,19 @@ var alienBulletY;
  * select(), and adds event listeners to those elements. Sets initial values of
  * variables by calling resetGame().
  */
-
+ function setup(){
+ canvas =createCanvas(canvasWidth,canvasHeight);
+  background(234, 112, 157);
+  gameScreen=select("#game-screen")
+ canvas.parent("game-screen");
+	shipColor = "#ffc0cb";
+	shipDiameter=30;
+	shipSpeed= 9;
+	shipX=250;
+	shipY=385;
+	bulletDiameter=20;
+	}
+ //gameScreen= select('#game-screen');
 
 /*
  * gameOver()
@@ -68,8 +82,34 @@ var alienBulletY;
  * This function draws the player's ship. It also controls the ship's
  * x value by checking if the player is holding down the left or right keys.
  */
+ function draw(){
+	background(234, 112, 157);
+	drawShip()
+}
+
+	 function drawShip(){
+	 	ellipse(shipX,shipY,25,25);
+		shipColor="#b2b2ff";
+		if (keyIsDown(LEFT_ARROW)&& shipX>shipDiameter/1.5){ 
+				shipX-=shipSpeed;
+		}
+		
+		if (keyIsDown(RIGHT_ARROW)&& shipX<shipDiameter*16){
+			shipX+=shipSpeed;
+		}
+		}
+	
+
+function keyPressed(){
+if()
 
 
+
+
+
+
+
+}
 /*
  * keyPressed()
  * This function runs automatically when the player presses the spacebar
