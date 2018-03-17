@@ -47,11 +47,12 @@ var alienBulletY;
   gameScreen=select("#game-screen")
  canvas.parent("game-screen");
 	shipColor = "#ffc0cb";
-	shipDiameter=30;
+	shipDiameter=70;
 	shipSpeed= 9;
-	shipX=250;
-	shipY=385;
-	bulletDiameter=20;
+	shipX=canvasWidth/2;
+	shipY=canvasHeight - shipDiameter/2  ;
+	bulletDiameter=40;
+	shipShooting=false;
 	}
  //gameScreen= select('#game-screen');
 
@@ -85,31 +86,29 @@ var alienBulletY;
  function draw(){
 	background(234, 112, 157);
 	drawShip()
+	if (shipShooting== true){
+		drawBullet();
+	}
 }
+//DRAW SHIP IS UNDER THIS
 
 	 function drawShip(){
-	 	ellipse(shipX,shipY,25,25);
+	 	fill(250,128,114)
+	 	ellipse(shipX,shipY,shipDiameter,shipDiameter);
 		shipColor="#b2b2ff";
-		if (keyIsDown(LEFT_ARROW)&& shipX>shipDiameter/1.5){ 
+		if (keyIsDown(LEFT_ARROW)&& shipX> 0 + shipDiameter/2){ 
 				shipX-=shipSpeed;
 		}
 		
-		if (keyIsDown(RIGHT_ARROW)&& shipX<shipDiameter*16){
+		if (keyIsDown(RIGHT_ARROW)&& shipX< 500 - shipDiameter/2){
 			shipX+=shipSpeed;
 		}
 		}
-	
-
-function keyPressed(){
-if()
 
 
 
+ 	
 
-
-
-
-}
 /*
  * keyPressed()
  * This function runs automatically when the player presses the spacebar
@@ -118,15 +117,40 @@ if()
  * ship. Then it sets the "shipShooting" variable to "true", indicating a ship
  * bullet is currently being fired.
  */
+ function keyPressed(){
+	if(keyCode==32 && shipShooting==false) {
+	
+		bulletX=shipX;
+		bulletY=shipY;
+		shipShooting=true;
+
+	}
+}
+
 
 
 /*
  * drawBullet()
  * This function draws a bullet. It also checks to see if the bullet has hit
- * the alien. If it has, the alien is reset to the top-left of the screen
+ * the alien. If it has, the alien is reset to the top-left o f the screen
  * and the player earns a point. The alien aslo becomes faster (i.e., harder
  * to hit) each time it is hit by a bullet.
  */
+ function drawBullet(){
+ 	if (bulletY>0){
+ 		//snip
+ 		bulletY-=10
+		fill(114,177,249);
+		ellipse(bulletX,bulletY,bulletDiameter,bulletDiameter);
+		if (shipShooting=true){
+			keyCode==32;
+		}
+	}
+	else{
+		shipShooting=false;
+	}
+ }
+
 
 
 /*
