@@ -53,6 +53,10 @@ var alienBulletY;
 	shipY=canvasHeight - shipDiameter/2  ;
 	bulletDiameter=40;
 	shipShooting=false;
+	alienDiameter=55;
+	alienVelocity=10;
+	alienX=0 + alienDiameter/2;
+	alienY=0 + alienDiameter/2;
 	}
  //gameScreen= select('#game-screen');
 
@@ -86,6 +90,7 @@ var alienBulletY;
  function draw(){
 	background(234, 112, 157);
 	drawShip()
+	drawAlien()
 	if (shipShooting== true){
 		drawBullet();
 	}
@@ -158,6 +163,18 @@ var alienBulletY;
  * This function draws an alien. It also checks to see if the alien has touched
  * the player's ship. If it has, the function calls gameOver().
  */
+ function drawAlien(){ 
+ 	fill(152,251,152);
+	 ellipse(alienX,alienY,alienDiameter,alienDiameter);
+	 	
+	  	alienX += alienVelocity;
+	 	if (alienX >= canvasWidth- alienDiameter/2){
+	 		alienVelocity *= -1 
+	 	}
+	 	 if (alienX <= 0 + alienDiameter/2){
+	 		alienVelocity *= -1 
+	 	}
+}
 
 
 /*
