@@ -94,6 +94,10 @@ var alienBulletY;
 	if (shipShooting== true){
 		drawBullet();
 	}
+		if(alienShooting==true){
+			drawAlienBullet();
+		}
+	
 }
 //DRAW SHIP IS UNDER THIS
 
@@ -174,6 +178,14 @@ var alienBulletY;
 	 	 if (alienX <= 0 + alienDiameter/2){
 	 		alienVelocity *= -1 
 	 	}
+	 	else if(alienX<=alienDiameter/2){
+	 		alienVelocity=10;
+	 	}
+	 	if (random(4)< 1 && !alienShooting){
+	 		alienBulletY=alienY;
+	 		alienBulletX=alienX;
+	 		alienShooting=true;
+	 	}
 }
 
 
@@ -182,7 +194,9 @@ var alienBulletY;
  * This function behaves much like drawBullet(), only it fires from the alien
  * and not the player's ship. If the bullet hits the player, it's game over.
  */
+function drawAlienBullet(){
 
+}
 
 /*
  * resetAlien()
@@ -200,4 +214,14 @@ var alienBulletY;
  * "true" if the circles are touching, and false otherwise.
  * Circles are considered touching if
  * (distance <= (circle1Diameter + circle2Diameter) / 2)
- */
+*/
+function checkCollision(aX, aY, aD, bX, bY, bD){
+	var distance = dist(aX, aY, bX, bY);
+	if (aD/2 +bD/2 >=distance){
+		return true;
+		//(distance <= (circle1Diameter + circle2Diameter) / 2)
+	}
+	else{
+		return false;
+	}
+}
